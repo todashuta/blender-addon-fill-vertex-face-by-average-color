@@ -23,7 +23,7 @@ import bpy
 bl_info = {
     "name": "Fill Vertex Face by Average Color",
     "author": "todashuta",
-    "version": (1, 0, 0),
+    "version": (1, 0, 1),
     "blender": (2, 80, 0),
     "location": "[Vertex Paint Mode] 3D View > Side Bar > Tool > Fill Vertex Face",
     "description": "",
@@ -45,7 +45,8 @@ class FILL_VERTEX_FACE_BY_AVERAGE_COLOR_OT_main(bpy.types.Operator):
         return (ob is not None
                 and ob.type == "MESH"
                 and ob.mode == "VERTEX_PAINT"
-                and ob.data.vertex_colors.active is not None)
+                and ob.data.vertex_colors.active is not None
+                and not ob.data.use_paint_mask_vertex)
 
     def execute(self, context):
         from mathutils import Vector
